@@ -1,56 +1,72 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public GunShot projectile;
-    public float primariShootsPerSecond = 4;
-    bool canShootPrimary = true;
+    public Weapon[] allWeapons;
+    public int currentWeaponId = 0;
+    Weapon currentWeapon => allWeapons[currentWeaponId];
     [Space]
-    public GunShot projectileSecondary;
-    public float secondaryShootsPerSecond = 4;
-    [Space]
-    public SpriteRenderer gunpoint;
+    public Transform gunpoint;
+
+    bool canShoot = true;
 
     void Update()
     {
-        if (canShootPrimary && Input.GetMouseButton(0))
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            StartCoroutine(ShootPrimary());
+            currentWeaponId++;
+            if (currentWeaponId > allWeapons.Length - 1)
+                currentWeaponId = 0;
         }
-        if (canShootPrimary && Input.GetMouseButton(1))
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            StartCoroutine(ShootSecondary());
+            currentWeaponId--;
+            if (currentWeaponId < 0)
+                currentWeaponId = allWeapons.Length - 1;
+        }
+        if (canShoot && currentWeapon.HasPrimary && Input.GetMouseButton(0))
+        {
+            StartCoroutine(Shoot(currentWeapon.primaryFire));
+        }
+        if (canShoot && currentWeapon.HasSecondary && Input.GetMouseButton(1))
+        {
+            StartCoroutine(Shoot(currentWeapon.secondaryFire));
         }
     }
 
-    private IEnumerator ShootPrimary()
+    private IEnumerator Shoot(ShotInfo shotInfo)
     {
-        canShootPrimary = false;
-        var newShot = Instantiate(projectile, gunpoint.transform.position, transform.rotation);
-        newShot.FactionToHit = Faction.OpponentTeam;
+        canShoot = false;
+        foreach (var projectile in shotInfo.projectiles)
+        {
+            var newProjectile = Instantiate(projectile, gunpoint.transform.position, transform.rotation);
+            newProjectile.FactionToHit = Faction.OpponentTeam;
+            newProjectile.transform.forward +=
+                newProjectile.transform.right * shotInfo.GetRandomDeviation +
+                newProjectile.transform.up * shotInfo.GetRandomDeviation;
+        }
 
-        gunpoint.color = Color.white;
-        yield return new WaitForSeconds(Mathf.Min(1 / primariShootsPerSecond, .05f));
-        gunpoint.color = new Color(0, 0, 0, 0);
+        yield return new WaitForSeconds(1 / shotInfo.shotsPerSecond);
+        canShoot = true;
+    }
+}
 
-        yield return new WaitForSeconds(1 / primariShootsPerSecond);
-        canShootPrimary = true;
+[System.Serializable]
+public struct ShotInfo
+{
+    public GunShot[] projectiles;
+    [Tooltip("value of 1 generates deviation of up to 45 degrees from aim")]
+    [Range(0, 1)] public float accuracity;
+    public float shotsPerSecond;
+
+    public ShotInfo(float accuracity, float shotsPerSecond) : this()
+    {
+        this.accuracity = accuracity;
+        this.shotsPerSecond = shotsPerSecond;
     }
 
-    private IEnumerator ShootSecondary()
-    {
-        canShootPrimary = false;
-        var newShot = Instantiate(projectileSecondary, gunpoint.transform.position, transform.rotation);
-        newShot.FactionToHit = Faction.OpponentTeam;
-
-        gunpoint.color = Color.white;
-        yield return new WaitForSeconds(Mathf.Min(1 / secondaryShootsPerSecond, .05f));
-        gunpoint.color = new Color(0, 0, 0, 0);
-
-        yield return new WaitForSeconds(1 / secondaryShootsPerSecond);
-        canShootPrimary = true;
-    }
+    public float GetDeviationValue => 1 - accuracity;
+    public float GetRandomDeviation => Random.Range(-GetDeviationValue, GetDeviationValue);
 }

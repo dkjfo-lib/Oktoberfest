@@ -22,13 +22,13 @@ public class GunShot : MonoBehaviour, ICanHit
         Destroy(gameObject, timeToLive);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        var movement = transform.right * speed * Time.deltaTime;
+        var movement = transform.forward * speed * Time.fixedDeltaTime;
         transform.position += movement;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         var hittable = collision.GetComponent<IHittable>();
         if (hittable == null) return;

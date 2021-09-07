@@ -199,7 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cb1828b6d606f4fa39d7f1404669d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NotActive: 0
 --- !u!114 &2031876973999333475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 218958093445030073}
   - component: {fileID: 4735314935985041023}
+  - component: {fileID: 1027942989}
   m_Layer: 0
   m_Name: hands&gun
   m_TagString: Untagged
@@ -295,8 +295,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537171432838923114}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.268, y: -0.017, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6682199571569635941}
@@ -315,11 +315,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39efb34697e446c45aec2e03d654d351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 7232707771191959695, guid: d4855901354e85d409a3337803882a9e, type: 3}
-  primariShootsPerSecond: 16
-  projectileSecondary: {fileID: 3912677773733512051, guid: 9b3fd703001a24e42a9b8a6712f5a577, type: 3}
-  secondaryShootsPerSecond: 2
-  gunpoint: {fileID: 0}
+  allWeapons:
+  - {fileID: 11400000, guid: 4d89ec7b270ad1d4c9b0b8df2cc35697, type: 2}
+  - {fileID: 11400000, guid: dc9fda270adc9774da00e6cec2dc506a, type: 2}
+  currentWeaponId: 0
+  gunpoint: {fileID: 6682199571569635941}
+--- !u!114 &1027942989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537171432838923114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3006d5d323006224fa34d2ae5447f3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3663665912609376089
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +645,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8078919838997285821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1730007, y: -0.09400006, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 218958093445030073}
