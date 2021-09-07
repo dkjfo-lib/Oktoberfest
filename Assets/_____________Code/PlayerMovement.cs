@@ -33,9 +33,9 @@ public class PlayerMovement : MonoBehaviour, IMovement
             if (input.x != 0 || input.z != 0)
             {
                 var inputXZ = new Vector3(input.x, 0, input.z).normalized;
-                var addMovementXZ = inputXZ * speed * Time.fixedDeltaTime;
+                var localInputXZ = inputXZ.x * transform.right + inputXZ.z * transform.forward;
+                var addMovementXZ = localInputXZ * speed * Time.fixedDeltaTime;
                 var newMovementXZ = rb.velocity + addMovementXZ;
-
                 rb.velocity = newMovementXZ;
             }
             rb.velocity = new Vector3(rb.velocity.x * speedMult, rb.velocity.y, rb.velocity.z * speedMult);
@@ -52,18 +52,12 @@ public class PlayerMovement : MonoBehaviour, IMovement
             if (input.x != 0 || input.z != 0)
             {
                 var inputXZ = new Vector3(input.x, 0, input.z).normalized;
-                var addMovementXZ = inputXZ * speed * Time.fixedDeltaTime * controlInAir;
+                var localInputXZ = inputXZ.x * transform.right + inputXZ.z * transform.forward;
+                var addMovementXZ = localInputXZ * speed * Time.fixedDeltaTime * controlInAir;
                 var newMovementXZ = rb.velocity + addMovementXZ;
-
                 rb.velocity = newMovementXZ;
             }
             rb.velocity = new Vector3(rb.velocity.x * speedMultInAir, rb.velocity.y, rb.velocity.z * speedMultInAir);
-            // move y
-            if (input.y != 0)
-            {
-                var movementY = input.y * jumpForce;
-                rb.velocity = new Vector3(rb.velocity.x, movementY, rb.velocity.z);
-            }
         }
     }
 
