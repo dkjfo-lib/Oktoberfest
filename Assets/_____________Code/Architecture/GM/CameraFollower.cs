@@ -14,34 +14,22 @@ public class CameraFollower : MonoBehaviour
     [Range(1f, 2f)] public float screenBorder = 1.2f;
 
     Vector3 Offset => offset;
-    
-    PlayerSinglton currentPlayer;
+
     Vector3 lastTargetPosition;
 
     private void Start()
     {
-        if (currentPlayer == null)
+        if (PlayerSinglton.IsGood)
         {
-            currentPlayer = PlayerSinglton.thePlayer;
-        }
-        transform.position = currentPlayer.transform.position + Offset;
-        StartCoroutine(KeepPlayerActive());
-    }
-
-    private IEnumerator KeepPlayerActive()
-    {
-        while (true)
-        {
-            yield return new WaitUntil(() => currentPlayer == null || currentPlayer.NotActive);
-            currentPlayer = PlayerSinglton.thePlayer;
+            transform.position = PlayerSinglton.PlayerPosition + Offset;
         }
     }
 
     void FixedUpdate()
     {
-        if (currentPlayer != null)
+        if (PlayerSinglton.IsGood)
         {
-            lastTargetPosition = currentPlayer.transform.position;
+            lastTargetPosition = PlayerSinglton.PlayerPosition;
         }
 
         var pX = Mathf.Clamp((Input.mousePosition.x / Screen.width * 2 - 1) * screenBorder, -1, 1);

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerSinglton : MonoBehaviour
 {
-    public static PlayerSinglton thePlayer;
-
-    public bool NotActive = false;
+    public static bool IsGood => thePlayer != null;
+    public static Vector3 PlayerPosition => thePlayer.transform.position;
+    static PlayerSinglton thePlayer;
 
     void Awake()
     {

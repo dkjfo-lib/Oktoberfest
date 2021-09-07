@@ -6,7 +6,6 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     public Pipe_SoundsPlay pipe;
-    private PlayerSinglton currentPlayer;
     [Space]
     public int maxDistance = 20;
     public int identicalClipsCount = 1;
@@ -23,32 +22,22 @@ public class SoundController : MonoBehaviour
         {
             soundPlayers[i] = Instantiate(soundPrefab, transform);
         }
-        StartCoroutine(KeepPlayerActive());
-    }
-
-    private IEnumerator KeepPlayerActive()
-    {
-        if (currentPlayer == null)
+        if (PlayerSinglton.IsGood)
         {
-            currentPlayer = PlayerSinglton.thePlayer;
-        }
-        while (true)
-        {
-            yield return new WaitUntil(() => currentPlayer == null || currentPlayer.NotActive);
-            currentPlayer = PlayerSinglton.thePlayer;
+            transform.position = PlayerSinglton.PlayerPosition;
         }
     }
 
     private void Update()
     {
-        if (currentPlayer == null) return;
+        if (!PlayerSinglton.IsGood) return;
 
         // TODO
         // [x] убери слишком далекие клипы
         // [x] разбей на группы по одинаковому клипу 
         // [ ] внутри группы сортировка по расстоянию от игрока
         // [ ] по порядку запускай из каждой следующий клип 
-        var clipsInRange = pipe.awaitingClips.Where(s => (s.position - currentPlayer.transform.position).sqrMagnitude < maxDistance * maxDistance);
+        var clipsInRange = pipe.awaitingClips.Where(s => (s.position - PlayerSinglton.PlayerPosition).sqrMagnitude < maxDistance * maxDistance);
         var identicalClips = clipsInRange.GroupBy(s => s.clipCollection);
         foreach (var sameClipsCollections in identicalClips)
         {

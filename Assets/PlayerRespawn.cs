@@ -18,7 +18,7 @@ public class PlayerRespawn : MonoBehaviour
 
     IEnumerator RespawnPlayer()
     {
-        yield return new WaitUntil(() => PlayerSinglton.thePlayer == null);
+        yield return new WaitUntil(() => !PlayerSinglton.IsGood);
         Time.timeScale = .5f;
         yield return new WaitForSeconds(1);
         Time.timeScale = 1;
