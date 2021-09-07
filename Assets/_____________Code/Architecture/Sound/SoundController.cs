@@ -33,11 +33,13 @@ public class SoundController : MonoBehaviour
         if (!PlayerSinglton.IsGood) return;
 
         // TODO
+        // [x] убери null клипы
         // [x] убери слишком далекие клипы
         // [x] разбей на группы по одинаковому клипу 
         // [ ] внутри группы сортировка по расстоянию от игрока
         // [ ] по порядку запускай из каждой следующий клип 
-        var clipsInRange = pipe.awaitingClips.Where(s => (s.position - PlayerSinglton.PlayerPosition).sqrMagnitude < maxDistance * maxDistance);
+        var clipsNotNull = pipe.awaitingClips.Where(s => s.clipCollection != null);
+        var clipsInRange = clipsNotNull.Where(s => (s.position - PlayerSinglton.PlayerPosition).sqrMagnitude < maxDistance * maxDistance);
         var identicalClips = clipsInRange.GroupBy(s => s.clipCollection);
         foreach (var sameClipsCollections in identicalClips)
         {
