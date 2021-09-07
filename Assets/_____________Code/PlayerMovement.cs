@@ -6,77 +6,85 @@ public class PlayerMovement : MonoBehaviour, IMovement
 {
     public float speed = 200;
     public float speedMult = .7f;
-    public float speedMultInAir = .98f;
     [Space]
+    public float speedMultInAir = .98f;
+    public float controlInAir = .2f;
     public float jumpForce = 200;
-    public float jumpVelCut = 2;
-    public float gravity = 3;
 
-    Rigidbody2D rb;
+    Rigidbody rb;
     GroundDetector gd;
 
-    Vector2 input;
-    public Vector2 CurrentInput => input;
+    Vector3 input;
+    public Vector3 CurrentInput => input;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         gd = GetComponentInChildren<GroundDetector>();
-        rb.gravityScale = gravity;
     }
 
     void FixedUpdate()
     {
-        // if in jump and 'W' is released
-        //if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0)
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / jumpVelCut);
-        //}
-
         var input = CreateInput();
 
         if (gd.onGround)
         {
-            // move x
-            if (input.x != 0)
+            // move xz
+            if (input.x != 0 || input.z != 0)
             {
-                if (gd.onGround)
-                {
-                    var movementX = input.x * speed * Time.fixedDeltaTime;
-                    rb.velocity = new Vector2(movementX, rb.velocity.y);
-                }
+                var inputXZ = new Vector3(input.x, 0, input.z).normalized;
+                var addMovementXZ = inputXZ * speed * Time.fixedDeltaTime;
+                var newMovementXZ = rb.velocity + addMovementXZ;
+
+                rb.velocity = newMovementXZ;
             }
-            else
-            {
-                rb.velocity = new Vector2(rb.velocity.x * speedMult, rb.velocity.y);
-            }
+            rb.velocity = new Vector3(rb.velocity.x * speedMult, rb.velocity.y, rb.velocity.z * speedMult);
             // move y
             if (input.y != 0)
             {
                 var movementY = input.y * jumpForce;
-                rb.velocity = new Vector2(rb.velocity.x, movementY);
+                rb.velocity = new Vector3(rb.velocity.x, movementY, rb.velocity.z);
             }
         }
         else
         {
-            rb.velocity = new Vector2(rb.velocity.x * speedMultInAir, rb.velocity.y);
+            // move xz
+            if (input.x != 0 || input.z != 0)
+            {
+                var inputXZ = new Vector3(input.x, 0, input.z).normalized;
+                var addMovementXZ = inputXZ * speed * Time.fixedDeltaTime * controlInAir;
+                var newMovementXZ = rb.velocity + addMovementXZ;
+
+                rb.velocity = newMovementXZ;
+            }
+            rb.velocity = new Vector3(rb.velocity.x * speedMultInAir, rb.velocity.y, rb.velocity.z * speedMultInAir);
+            // move y
+            if (input.y != 0)
+            {
+                var movementY = input.y * jumpForce;
+                rb.velocity = new Vector3(rb.velocity.x, movementY, rb.velocity.z);
+            }
         }
     }
 
-    private Vector2 CreateInput()
+    private Vector3 CreateInput()
     {
-        input = Vector2.zero;
+        input = Vector3.zero;
         if (Input.GetKey(KeyCode.A))
-            input -= Vector2.right;
+            input -= Vector3.right;
         if (Input.GetKey(KeyCode.D))
-            input += Vector2.right;
+            input += Vector3.right;
         if (Input.GetKey(KeyCode.W))
-            input += Vector2.up;
+            input += Vector3.forward;
+        if (Input.GetKey(KeyCode.S))
+            input -= Vector3.forward;
+        if (Input.GetKey(KeyCode.Space))
+            input -= Vector3.up;
         return input;
     }
 }
 
 public interface IMovement
 {
-    Vector2 CurrentInput { get; }
+    Vector3 CurrentInput { get; }
 }
