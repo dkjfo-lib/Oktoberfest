@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100438488430479908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.05, z: 0.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8220523184812369616}
@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 8555306944024091367}
   - component: {fileID: 2007114369}
   - component: {fileID: 2007114370}
-  m_Layer: 12
-  m_Name: body
+  m_Layer: 7
+  m_Name: mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379bd22494ee34e46b880dbe453aa30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camRotationY: {fileID: 0}
 --- !u!1 &3537171432838923114
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +363,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3, z: 1}
+  m_Size: {x: 0.7, y: 0.3, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3942982993048785974
 GameObject:
@@ -377,7 +376,7 @@ GameObject:
   - component: {fileID: 5777215815355558769}
   - component: {fileID: 1855144228101588950}
   m_Layer: 12
-  m_Name: head
+  m_Name: hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,13 +527,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6478711805646566204}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7097461, w: 0.7044576}
-  m_LocalPosition: {x: -0.11800003, y: -0.04699993, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 911968019534073327}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6625407439331167271
 Light:
   m_ObjectHideFlags: 0
@@ -544,13 +543,13 @@ Light:
   m_GameObject: {fileID: 6478711805646566204}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 5
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Color: {r: 1, g: 0.90721107, b: 0.7490566, a: 1}
+  m_Intensity: 4
+  m_Range: 20
+  m_SpotAngle: 90
+  m_InnerSpotAngle: 60
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -581,10 +580,10 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 192
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
