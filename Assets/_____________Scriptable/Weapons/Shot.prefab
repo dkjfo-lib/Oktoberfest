@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4672401664167637438}
   - component: {fileID: 6389493635302546921}
   - component: {fileID: 5178433655351561917}
-  - component: {fileID: 2371259488678234768}
   - component: {fileID: 2949379753765352260}
   - component: {fileID: 5977442985457239805}
   m_Layer: 10
@@ -133,22 +132,6 @@ MonoBehaviour:
     amplitude: 0.15
     duration: 0.1
     shakesPerSecond: 1000
-  onStart: 1
-  onDestroy: 0
---- !u!114 &2371259488678234768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128160374494526987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae07224ddcebce448a443c3d28a77f17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
-  sound: {fileID: 11400000, guid: d4b6780e11cb21b43bf145d5027b01ac, type: 2}
   onStart: 1
   onDestroy: 0
 --- !u!114 &2949379753765352260

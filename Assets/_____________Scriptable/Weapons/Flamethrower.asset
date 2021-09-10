@@ -12,15 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcab47d48857e5642a386cd06adb3c0b, type: 3}
   m_Name: Flamethrower
   m_EditorClassIdentifier: 
-  weaponName: SMG
+  weaponName: Flamethrower
   primaryFire:
     projectiles:
     - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
     - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
     - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+    delayBetweenProjectiles: 0
     accuracity: 0
-    shotsPerSecond: 8
+    shotsPerSecond: 16
+    ammoType: 2
+    shotCost: 1
+    clipSize: 80
+    ammoInClip: 53
+    reloadTime: 2
+    fireSound: {fileID: 11400000, guid: 0f2927c25ccf5b441a3acd67dc66d81b, type: 2}
   secondaryFire:
     projectiles: []
+    delayBetweenProjectiles: 0
     accuracity: 0
     shotsPerSecond: 0
+    ammoType: 0
+    shotCost: 0
+    clipSize: 0
+    ammoInClip: 0
+    reloadTime: 0
+    fireSound: {fileID: 0}
