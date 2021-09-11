@@ -2,23 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotSight : MonoBehaviour
+public class BotSight : MonoBehaviour, IBotSight
 {
     public float radius = 5;
     public float innerRadius = 1.2f;
 
     public PlayerSinglton thePlayer;
-    public Vector3 vectorToPlayer => thePlayer.transform.position - transform.position;
+    // "Vector3.up * 1" due to error in character's y coordinate
+    public Vector3 vectorToPlayer => thePlayer.transform.position + Vector3.up * 1 - transform.position;
     public Vector3 directionToPlayer => vectorToPlayer.normalized;
     public float distanceToPlayer => vectorToPlayer.magnitude;
 
     public Transform hitted;
     public bool canSee = false;
 
+    public bool CanSee => canSee;
+    public bool EnemyIsNear => thePlayer != null;
+
     void Start()
     {
         thePlayer = null;
-        GetComponent<CircleCollider2D>().radius = radius;
+        GetComponent<SphereCollider>().radius = radius;
 
         StartCoroutine(LookAtPlayer());
     }
@@ -28,12 +32,24 @@ public class BotSight : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => thePlayer != null);
-            var hit = Physics2D.Raycast(transform.position + directionToPlayer * innerRadius, directionToPlayer, distanceToPlayer - innerRadius + .75f, Layers.CharactersAndGround);
 
-            hitted = hit.transform;
-            if (hit.transform != null)
+            Vector3 origin = transform.position + directionToPlayer * innerRadius;
+            Vector3 direction = directionToPlayer;
+            RaycastHit raycastHit;
+            float castRadius = distanceToPlayer - innerRadius + .75f;
+            var hit = Physics.Raycast(origin, direction, out raycastHit, castRadius, Layers.CharactersAndGround);
+
+            if (hit)
             {
-                canSee = hit.transform.GetComponent<PlayerSinglton>() != null;
+                hitted = raycastHit.transform;
+                if (raycastHit.transform != null)
+                {
+                    canSee = raycastHit.transform.GetComponent<PlayerSinglton>() != null;
+                }
+                else
+                {
+                    canSee = false;
+                }
             }
             else
             {
@@ -44,17 +60,23 @@ public class BotSight : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        var player = collision.GetComponent<PlayerSinglton>();
+        if (!PlayerSinglton.IsGood) return;
+
+        var player = collision.transform.parent.parent.
+            GetComponent<PlayerSinglton>();
         if (player == null) return;
 
         thePlayer = player;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
-        var player = collision.GetComponent<PlayerSinglton>();
+        if (!PlayerSinglton.IsGood) return;
+
+        var player = collision.transform.parent.parent.
+            GetComponent<PlayerSinglton>();
         if (player == null) return;
 
         thePlayer = null;
@@ -71,7 +93,17 @@ public class BotSight : MonoBehaviour
         if (thePlayer != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position + directionToPlayer * innerRadius, transform.position + directionToPlayer * (distanceToPlayer - innerRadius + .75f));
+
+            Vector3 origin = transform.position + directionToPlayer * innerRadius;
+            float castDistance = distanceToPlayer - innerRadius + .75f;
+            Vector3 end = transform.position + directionToPlayer * castDistance;
+            Gizmos.DrawLine(origin, end);
         }
     }
+}
+
+public interface IBotSight
+{
+    bool CanSee { get; }
+    bool EnemyIsNear { get; }
 }
