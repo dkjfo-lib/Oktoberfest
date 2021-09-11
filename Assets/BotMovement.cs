@@ -6,11 +6,12 @@ using UnityEngine.AI;
 public class BotMovement : MonoBehaviour, IBotMovement
 {
     public float courseUpdateTime = .1f;
+    public float attackAngleDotProd => botStats.AttackAngleDotProd;
+    public float attackRange => botStats.AttackRange;
     [Space]
     public BotSight BotSight;
+    public BotStats botStats;
     [Space]
-
-
     public bool inAttack = true;
     public bool InDistanceForAttack => BotSight.CanSee ?
         BotSight.distanceToPlayer <= NavMeshAgent.stoppingDistance :
@@ -22,6 +23,8 @@ public class BotMovement : MonoBehaviour, IBotMovement
     void Start()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        NavMeshAgent.speed = botStats.MovementSpeed;
+        NavMeshAgent.stoppingDistance = attackRange;
 
         StartCoroutine(KeepWalking());
     }
@@ -30,16 +33,35 @@ public class BotMovement : MonoBehaviour, IBotMovement
     {
         while (true)
         {
-            yield return new WaitUntil(() => inAttack && BotSight.CanSee);
-            while (inAttack && BotSight.CanSee)
+            yield return new WaitUntil(() => !inAttack && BotSight.CanSee);
+            while (!inAttack && BotSight.CanSee)
             {
-                if (BotSight.distanceToPlayer > NavMeshAgent.stoppingDistance)
+                if (!IsEnemyInRangeForAttack(BotSight.distanceToPlayer))
                 {
                     NavMeshAgent.SetDestination(PlayerSinglton.PlayerPosition);
                 }
                 yield return new WaitForSeconds(courseUpdateTime);
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        if (!inAttack && BotSight.CanSee && !IsEnemyInAngleForAttack())
+        {
+            var _lookRotation = Quaternion.LookRotation(BotSight.directionToPlayer);
+            transform.rotation = Quaternion.Lerp(transform.rotation, _lookRotation, NavMeshAgent.angularSpeed / 360 * Time.deltaTime);
+        }
+    }
+
+    bool IsEnemyInAngleForAttack()
+    {
+        return BotSight.dotProductToPlayer > attackAngleDotProd;
+    }
+
+    bool IsEnemyInRangeForAttack(float distanceToEnemy)
+    {
+        return distanceToEnemy < attackRange;
     }
 }
 

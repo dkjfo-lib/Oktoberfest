@@ -2873,7 +2873,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21502
+  m_Name: pb_Mesh21514
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3816,7 +3816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14d796e6c7f4494a8a97476718f7b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonitoredNumber: {fileID: 11400000, guid: c9c07fb7e3f0194468fe518df0fde63b, type: 2}
+  MonitoredNumber: {fileID: 11400000, guid: 5493bb20cbea8a94b91cfbea3f2e01a0, type: 2}
   slider: {fileID: 916832887}
 --- !u!1 &1731678480
 GameObject:
@@ -4150,7 +4150,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21660
+  m_Name: pb_Mesh21668
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4954,10 +4954,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2007114369, guid: a9a1707fca382de468a89927be1fd9a7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 327832684213735125, guid: a9a1707fca382de468a89927be1fd9a7, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerHittable : MonoBehaviour, IHittable
 {
@@ -10,8 +11,8 @@ public class PlayerHittable : MonoBehaviour, IHittable
     public Faction Faction => faction;
     [Space]
     public ClampedValue Addon_HPValueOutput;
-    [Space]
     public ParticleSystem addon_onBodyPartDestroyParticles;
+    public NavMeshAgent addon_BotNavMesh;
     [Space]
     public Pipe_SoundsPlay Pipe_SoundsPlay;
     public ClipsCollection sounds_hit;
@@ -35,6 +36,10 @@ public class PlayerHittable : MonoBehaviour, IHittable
         else
         {
             Pipe_SoundsPlay?.AddClip(new PlayClipData(sounds_hit, transform.position));
+            if (addon_BotNavMesh != null)
+            {
+                addon_BotNavMesh.SetDestination(PlayerSinglton.PlayerPosition);
+            }
         }
     }
 

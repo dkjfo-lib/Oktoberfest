@@ -127,6 +127,7 @@ MonoBehaviour:
   faction: 2
   Addon_HPValueOutput: {fileID: 0}
   addon_onBodyPartDestroyParticles: {fileID: 0}
+  addon_BotNavMesh: {fileID: 0}
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   sounds_hit: {fileID: 11400000, guid: 5fc95cab4bb8cbd448f8d107dbf381be, type: 2}
   sounds_bodyPartDestroed: {fileID: 11400000, guid: 3da49ea288057d84d8a3a6090fa04764, type: 2}
@@ -471,6 +472,7 @@ MonoBehaviour:
   currentWeaponId: 0
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   gunpoint: {fileID: 6682199571569635941}
+  canShoot: 1
 --- !u!114 &1027942989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5777215815355558769}
   - component: {fileID: 1855144228101588950}
+  - component: {fileID: 8321037291152783353}
   m_Layer: 12
   m_Name: HitBox
   m_TagString: Untagged
@@ -630,11 +633,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 15
   faction: 2
-  Addon_HPValueOutput: {fileID: 0}
+  Addon_HPValueOutput: {fileID: 11400000, guid: 5493bb20cbea8a94b91cfbea3f2e01a0, type: 2}
   addon_onBodyPartDestroyParticles: {fileID: 9016459303696241561, guid: d39856a2eb7b09c40a822bb4134aec2f, type: 3}
+  addon_BotNavMesh: {fileID: 0}
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   sounds_hit: {fileID: 11400000, guid: 5fc95cab4bb8cbd448f8d107dbf381be, type: 2}
   sounds_bodyPartDestroed: {fileID: 11400000, guid: 3da49ea288057d84d8a3a6090fa04764, type: 2}
+--- !u!136 &8321037291152783353
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942982993048785974}
+  m_Material: {fileID: 13400000, guid: 13f0e41975cd6e0419288b683aa50094, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &5335836710909456512
 GameObject:
   m_ObjectHideFlags: 0

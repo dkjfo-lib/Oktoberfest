@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305713745}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.9879137, y: 1.4295197, z: 0.10840392}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 314731306702529792}
   m_RootOrder: 4
@@ -43,14 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4c99afabdf8fd4c992b6deba4e4517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: {fileID: 11400000, guid: dc9fda270adc9774da00e6cec2dc506a, type: 2}
-  shootDelay: 0.75
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   gunpoint: {fileID: 1634425156}
   canShoot: 1
   BotSight: {fileID: 3528071464401623948}
   BotMovement: {fileID: 314731306702529793}
   BotMeshAnimator: {fileID: 7094574938925319890}
+  botStats: {fileID: 2958934105623283137}
 --- !u!1 &1634425155
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,10 +74,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634425155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.122, y: 0, z: -0.048}
+  m_LocalPosition: {x: 0.007, y: 0.149, z: 0.0454}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2865496120434317702}
+  m_Father: {fileID: 3982756642904418341}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &10406868672709202
@@ -213,6 +212,7 @@ GameObject:
   - component: {fileID: 314731306702529792}
   - component: {fileID: 314731306702529794}
   - component: {fileID: 314731306702529793}
+  - component: {fileID: 2958934105623283137}
   m_Layer: 7
   m_Name: Bot - Maid
   m_TagString: Untagged
@@ -275,7 +275,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   courseUpdateTime: 0.1
   BotSight: {fileID: 3528071464401623948}
-  inAttack: 1
+  botStats: {fileID: 2958934105623283137}
+  inAttack: 0
+--- !u!114 &2958934105623283137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314731306702529807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a801905388a9b9241b6a90943ff84f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SightRange: 10
+  BlindCloseRange: 1.2
+  SightAngleDotProd: 0.25
+  MovementSpeed: 10
+  AttackRange: 5
+  AttackAngleDotProd: 0.9
+  Weapon: {fileID: 11400000, guid: 4d89ec7b270ad1d4c9b0b8df2cc35697, type: 2}
+  ShootDelayBetweenValleys: 0.75
+  ShotsInValley: 3
 --- !u!1 &314731306907635832
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,9 +407,10 @@ MonoBehaviour:
   faction: 3
   Addon_HPValueOutput: {fileID: 0}
   addon_onBodyPartDestroyParticles: {fileID: 9016459303696241561, guid: d39856a2eb7b09c40a822bb4134aec2f, type: 3}
+  addon_BotNavMesh: {fileID: 314731306702529794}
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   sounds_hit: {fileID: 11400000, guid: 5fc95cab4bb8cbd448f8d107dbf381be, type: 2}
-  sounds_bodyPartDestroed: {fileID: 0}
+  sounds_bodyPartDestroed: {fileID: 11400000, guid: 5fc95cab4bb8cbd448f8d107dbf381be, type: 2}
 --- !u!1 &946217639529637893
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,11 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aabe7330303afb4ebbc23ff60d67f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  innerRadius: 1.2
-  thePlayer: {fileID: 0}
-  hitted: {fileID: 0}
-  canSee: 0
+  BotStats: {fileID: 2958934105623283137}
 --- !u!54 &2612323544758561497
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -678,18 +697,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
---- !u!4 &2865496120434317702 stripped
+--- !u!1 &290107111588770484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7601558369458539948, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3982756642904418341 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5385401787158505118, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6502384218030233405, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
   m_PrefabInstance: {fileID: 7888199807375343384}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1102671955437316110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7076836869908535062, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
-  m_PrefabInstance: {fileID: 7888199807375343384}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &290107111588770484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7601558369458539948, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
   m_PrefabInstance: {fileID: 7888199807375343384}
   m_PrefabAsset: {fileID: 0}
