@@ -8,6 +8,8 @@ public class GunShot : MonoBehaviour, ICanHit
     public float speed = 10;
     public float timeToLive = .75f;
     public Faction FactionToHit = Faction.AlwaysHit;
+    [Space]
+    public ParticleSystem addon_trail;
 
     public Object CoreObject => transform;
     public bool IsSelfDamageOn => false;
@@ -36,6 +38,12 @@ public class GunShot : MonoBehaviour, ICanHit
         if (this.ShouldHit(hittable))
         {
             hittable.GetHit(new Hit(damage));
+
+            if (addon_trail != null)
+            {
+                addon_trail.transform.parent = transform.parent;
+                Destroy(addon_trail.gameObject, addon_trail.main.duration);
+            }
 
             Destroy(gameObject);
         }

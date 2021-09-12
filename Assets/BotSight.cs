@@ -35,31 +35,39 @@ public class BotSight : MonoBehaviour, IBotSight
     IEnumerator LookAtPlayer()
     {
         bool IsPlayerInFront() => dotProductToPlayer >= sightDotProduct;
+        bool IsPlayerTooClose() => distanceToPlayer <= blindCloseRange;
         while (true)
         {
-            yield return new WaitUntil(() => thePlayer != null && IsPlayerInFront());
+            yield return new WaitUntil(() => thePlayer != null && (IsPlayerInFront() || IsPlayerTooClose()));
 
-            Vector3 origin = transform.position + directionToPlayer * blindCloseRange;
-            Vector3 direction = directionToPlayer;
-            RaycastHit raycastHit;
-            float castRadius = distanceToPlayer - blindCloseRange + .75f;
-            var hit = Physics.Raycast(origin, direction, out raycastHit, castRadius, Layers.CharactersAndGround);
-
-            if (hit)
+            if (IsPlayerTooClose())
             {
-                var hitted = raycastHit.transform;
-                if (raycastHit.transform != null)
+                canSee = true;
+            }
+            else
+            {
+                Vector3 origin = transform.position + directionToPlayer * blindCloseRange;
+                Vector3 direction = directionToPlayer;
+                RaycastHit raycastHit;
+                float castRadius = distanceToPlayer - blindCloseRange + .75f;
+                var hit = Physics.Raycast(origin, direction, out raycastHit, castRadius, Layers.CharactersAndGround);
+
+                if (hit)
                 {
-                    canSee = raycastHit.transform.GetComponent<PlayerSinglton>() != null;
+                    var hitted = raycastHit.transform;
+                    if (raycastHit.transform != null)
+                    {
+                        canSee = raycastHit.transform.GetComponent<PlayerSinglton>() != null;
+                    }
+                    else
+                    {
+                        canSee = false;
+                    }
                 }
                 else
                 {
                     canSee = false;
                 }
-            }
-            else
-            {
-                canSee = false;
             }
 
             yield return new WaitForSeconds(.5f);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public Weapon[] allWeapons;
+    public GameObject[] allWeaponsModels;
     [Space]
     public int currentWeaponId = 0;
     [Space]
@@ -17,11 +18,17 @@ public class PlayerShoot : MonoBehaviour
 
     public Coroutine currentAction;
 
+    void Start()
+    {
+        allWeaponsModels[currentWeaponId].SetActive(true);
+    }
+
     void Update()
     {
         // change weapon
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
+            allWeaponsModels[currentWeaponId].SetActive(false);
             currentWeaponId++;
             if (currentWeaponId > allWeapons.Length - 1)
                 currentWeaponId = 0;
@@ -30,9 +37,11 @@ public class PlayerShoot : MonoBehaviour
                 StopCoroutine(currentAction);
                 canShoot = true;
             }
+            allWeaponsModels[currentWeaponId].SetActive(true);
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
+            allWeaponsModels[currentWeaponId].SetActive(false);
             currentWeaponId--;
             if (currentWeaponId < 0)
                 currentWeaponId = allWeapons.Length - 1;
@@ -41,6 +50,7 @@ public class PlayerShoot : MonoBehaviour
                 StopCoroutine(currentAction);
                 canShoot = true;
             }
+            allWeaponsModels[currentWeaponId].SetActive(true);
         }
         // shoot
         if (canShoot && currentWeapon.HasPrimary && Input.GetMouseButton(0))
