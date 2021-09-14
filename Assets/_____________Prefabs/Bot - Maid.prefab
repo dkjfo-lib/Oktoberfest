@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 314731306702529794}
   - component: {fileID: 314731306702529793}
   - component: {fileID: 2958934105623283137}
+  - component: {fileID: 4423753164088145569}
   m_Layer: 7
   m_Name: Bot - Maid
   m_TagString: Untagged
@@ -298,6 +299,34 @@ MonoBehaviour:
   Weapon: {fileID: 11400000, guid: d572764428085d94783b9e6be5b425bf, type: 2}
   ShootDelayBetweenValleys: 0.75
   ShotsInValley: 1
+--- !u!114 &4423753164088145569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314731306702529807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7536533fb07c6b44869b5dd99008f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlledMeshes:
+  - {fileID: 8941820916219841147}
+  - {fileID: 7064145072947800382}
+  - {fileID: 579636478807230525}
+  - {fileID: 5578671238215560685}
+  - {fileID: 5145406581855609810}
+  - {fileID: 4194168647375785568}
+  rendDistance: 40
+  togglePoints:
+  - {x: 1, y: 3, z: 1}
+  - {x: 1, y: 3, z: -1}
+  - {x: -1, y: 3, z: 1}
+  - {x: -1, y: 3, z: -1}
+  rendDotAngle: 0.4
+  updateEveryRrame: 2
+  currentState: 1
 --- !u!1 &314731306907635832
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,9 +752,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
---- !u!1 &290107111588770484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7601558369458539948, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+--- !u!137 &7064145072947800382 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1112496217348658726, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &579636478807230525 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7310410508639713061, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5578671238215560685 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2311446126029411061, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5145406581855609810 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3031111563141225674, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
   m_PrefabInstance: {fileID: 7888199807375343384}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3982756642904418341 stripped
@@ -733,8 +777,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6502384218030233405, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
   m_PrefabInstance: {fileID: 7888199807375343384}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &4194168647375785568 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6290453115087057272, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8941820916219841147 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1256285842047530339, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1102671955437316110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7076836869908535062, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
+  m_PrefabInstance: {fileID: 7888199807375343384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &290107111588770484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7601558369458539948, guid: f34d76e3bd1c59049b03b562cd36a10b, type: 3}
   m_PrefabInstance: {fileID: 7888199807375343384}
   m_PrefabAsset: {fileID: 0}

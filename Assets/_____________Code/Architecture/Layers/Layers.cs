@@ -9,6 +9,7 @@ public class Layers : MonoBehaviour
     public static LayerMask Items { get; }
     public static LayerMask CharactersAndItems { get; }
     public static LayerMask CharactersAndGround { get; }
+    public static LayerMask PlayerAndGround { get; }
 
     static Layers()
     {
@@ -17,5 +18,6 @@ public class Layers : MonoBehaviour
         Items = LayerMask.GetMask("Items");
         CharactersAndItems = LayerMask.GetMask("Characters", "Items");
         CharactersAndGround = LayerMask.GetMask("Characters", "Ground");
+        PlayerAndGround = LayerMask.GetMask("Player", "Ground");
     }
 }

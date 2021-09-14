@@ -11,7 +11,6 @@ public class PlayerHittable : MonoBehaviour, IHittable
     public Faction Faction => faction;
     [Space]
     public ClampedValue Addon_HPValueOutput;
-    public ParticleSystem addon_onBodyPartDestroyParticles;
     public NavMeshAgent addon_BotNavMesh;
     [Space]
     public Pipe_SoundsPlay Pipe_SoundsPlay;
@@ -45,12 +44,6 @@ public class PlayerHittable : MonoBehaviour, IHittable
 
     private void Die()
     {
-        if (addon_onBodyPartDestroyParticles != null)
-        {
-            var praticles = Instantiate(addon_onBodyPartDestroyParticles, transform.position, Quaternion.identity);
-            Destroy(praticles.gameObject, 3);
-        }
-
         Destroy(transform.parent.parent.gameObject);
     }
 }

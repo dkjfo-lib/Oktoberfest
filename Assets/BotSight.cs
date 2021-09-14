@@ -50,7 +50,7 @@ public class BotSight : MonoBehaviour, IBotSight
                 Vector3 direction = directionToPlayer;
                 RaycastHit raycastHit;
                 float castRadius = distanceToPlayer - blindCloseRange + .75f;
-                var hit = Physics.Raycast(origin, direction, out raycastHit, castRadius, Layers.CharactersAndGround);
+                var hit = Physics.Raycast(origin, direction, out raycastHit, castRadius, Layers.PlayerAndGround);
 
                 if (hit)
                 {
