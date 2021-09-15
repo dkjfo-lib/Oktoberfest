@@ -5,7 +5,7 @@ using UnityEngine;
 public class BotShoot : MonoBehaviour
 {
     public Weapon weapon => botStats.Weapon;
-    public float shootDelay => botStats.ShootDelayBetweenValleys;
+    public float botAimTime => botStats.BotAimTime;
     public float attackAngleDotProd => botStats.AttackAngleDotProd;
     [Space]
     public Pipe_SoundsPlay Pipe_SoundsPlay;
@@ -37,7 +37,7 @@ public class BotShoot : MonoBehaviour
         BotMovement.inAttack = true;
         Vector3 shootDirection = (PlayerSinglton.PlayerPosition - transform.position ).normalized;
 
-        yield return new WaitForSeconds(shootDelay);
+        yield return new WaitForSeconds(botAimTime);
 
         
         for (int i = 0; i < botStats.ShotsInValley; i++)

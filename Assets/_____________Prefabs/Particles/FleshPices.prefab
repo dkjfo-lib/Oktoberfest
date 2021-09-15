@@ -1027,7 +1027,7 @@ ParticleSystem:
           m_RotationOrder: 4
       cycleCount: 1
       repeatInterval: 0.01
-      probability: 0.88
+      probability: 1
     - serializedVersion: 2
       time: 0.05
       countCurve:

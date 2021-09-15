@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour, IMovement
     public float speedMultInAir = .98f;
     public float controlInAir = .2f;
     public float jumpForce = 200;
+    [Space]
+    public Pipe_SoundsPlay Addon_Pipe_SoundsPlay;
+    public ClipsCollection Addon_stepSound;
 
     Rigidbody rb;
     GroundDetector gd;
@@ -21,6 +24,18 @@ public class PlayerMovement : MonoBehaviour, IMovement
     {
         rb = GetComponent<Rigidbody>();
         gd = GetComponentInChildren<GroundDetector>();
+        StartCoroutine(SoundWalking());
+    }
+
+    IEnumerator SoundWalking()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => gd.onGround && rb.velocity.sqrMagnitude > 4f);
+            if (Addon_Pipe_SoundsPlay != null && Addon_stepSound != null)
+                Addon_Pipe_SoundsPlay.AddClip(new PlayClipData(Addon_stepSound, Camera.main.transform.position, Camera.main.transform));
+            yield return new WaitForSeconds(.25f);
+        }
     }
 
     void FixedUpdate()

@@ -13,9 +13,12 @@ public class BotMovement : MonoBehaviour, IBotMovement
     public BotStats botStats;
     [Space]
     public bool inAttack = true;
+    [Space]
+    public Pipe_SoundsPlay Addon_Pipe_SoundsPlay;
+    public ClipsCollection Addon_stepSound;
+
     public bool InDistanceForAttack => BotSight.CanSee ?
-        BotSight.distanceToPlayer <= NavMeshAgent.stoppingDistance :
-        false;
+        BotSight.distanceToPlayer <= NavMeshAgent.stoppingDistance : false;
     public bool IsMoving => NavMeshAgent.velocity.sqrMagnitude > 4;
 
     NavMeshAgent NavMeshAgent;
@@ -27,6 +30,18 @@ public class BotMovement : MonoBehaviour, IBotMovement
         NavMeshAgent.stoppingDistance = attackRange;
 
         StartCoroutine(KeepWalking());
+        StartCoroutine(SoundWalking());
+    }
+
+    IEnumerator SoundWalking()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => IsMoving);
+            if (Addon_Pipe_SoundsPlay != null && Addon_stepSound != null)
+                Addon_Pipe_SoundsPlay.AddClip(new PlayClipData(Addon_stepSound, Camera.main.transform.position, Camera.main.transform));
+            yield return new WaitForSeconds(.25f);
+        }
     }
 
     IEnumerator KeepWalking()

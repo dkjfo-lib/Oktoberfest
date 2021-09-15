@@ -18,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
     public float currentAccuracity = 1;
 
     Weapon currentWeapon => allWeapons[currentWeaponId];
+    bool isInMenu => Time.timeScale == 0;
 
     public Coroutine currentAction;
 
@@ -44,6 +45,8 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        if (isInMenu) return;
+
         // change weapon
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
@@ -112,7 +115,7 @@ public class PlayerShoot : MonoBehaviour
     {
         canShoot = false;
         shotInfo.ammoInClip -= shotInfo.shotCost;
-        Pipe_SoundsPlay.AddClip(new PlayClipData(shotInfo.fireSound, transform.position, transform));
+        Pipe_SoundsPlay.AddClip(new PlayClipData(shotInfo.fireSound, Camera.main.transform.position, Camera.main.transform));
 
         foreach (var burst in shotInfo.bursts)
         {

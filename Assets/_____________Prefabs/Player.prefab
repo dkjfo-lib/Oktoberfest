@@ -291,6 +291,8 @@ MonoBehaviour:
   speedMultInAir: 0.96
   controlInAir: 0.2
   jumpForce: -15
+  Addon_Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
+  Addon_stepSound: {fileID: 11400000, guid: 60781fc6f0cfc4442a3e6970d6db8ef9, type: 2}
 --- !u!114 &5983582370938733516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +676,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnList:
+  - item: {fileID: 9016459303696241567, guid: d39856a2eb7b09c40a822bb4134aec2f, type: 3}
+    deleteAfter: 3
+  - item: {fileID: 9016459303696241567, guid: d39856a2eb7b09c40a822bb4134aec2f, type: 3}
+    deleteAfter: 3
   - item: {fileID: 9016459303696241567, guid: d39856a2eb7b09c40a822bb4134aec2f, type: 3}
     deleteAfter: 3
 --- !u!1 &5335836710909456512

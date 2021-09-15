@@ -277,6 +277,8 @@ MonoBehaviour:
   BotSight: {fileID: 3528071464401623948}
   botStats: {fileID: 2958934105623283137}
   inAttack: 0
+  Addon_Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
+  Addon_stepSound: {fileID: 11400000, guid: e963542f2aff149429a9d0acc7ce7c59, type: 2}
 --- !u!114 &2958934105623283137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,10 +295,10 @@ MonoBehaviour:
   BlindCloseRange: 2
   SightAngleDotProd: 0.25
   MovementSpeed: 10
-  AttackRange: 5
-  AttackAngleDotProd: 0.9
+  AttackRange: 8
+  AttackAngleDotProd: 0.95
   Weapon: {fileID: 11400000, guid: d572764428085d94783b9e6be5b425bf, type: 2}
-  ShootDelayBetweenValleys: 0.75
+  BotAimTime: 0.25
   ShotsInValley: 1
 --- !u!114 &4423753164088145569
 MonoBehaviour:

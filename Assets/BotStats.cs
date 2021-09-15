@@ -16,7 +16,7 @@ public class BotStats : MonoBehaviour
     public float AttackAngleDotProd = .9f;
     [Space]
     public Weapon Weapon;
-    public float ShootDelayBetweenValleys = .75f;
+    public float BotAimTime = .75f;
     public float ShotsInValley = 1;
 
 
