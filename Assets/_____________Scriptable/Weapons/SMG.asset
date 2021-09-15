@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SMG
   primaryFire:
-    projectiles:
-    - {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
+    bursts:
+    - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
+      count: 1
     delayBetweenProjectiles: 0
     accuracity: 0.93
     shotsPerSecond: 8
     ammoType: 0
     shotCost: 1
     clipSize: 20
-    ammoInClip: 20
+    ammoInClip: 15
     reloadTime: 0.5
     fireSound: {fileID: 11400000, guid: d4b6780e11cb21b43bf145d5027b01ac, type: 2}
   secondaryFire:
-    projectiles: []
+    bursts: []
     delayBetweenProjectiles: 0
     accuracity: 0
     shotsPerSecond: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e95b1df63a6a1641bf2c29c6da25b02, type: 3}
-  m_Name: S Shoot Gun
+  m_Name: S Shotgun
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 264f5ea480ddec24b947aabe3e6043ee, type: 3}
+  - {fileID: 8300000, guid: 3bf857c8c42c54945bcf09a36c8af21d, type: 3}

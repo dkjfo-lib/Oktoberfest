@@ -7,8 +7,8 @@ public class CameraFollower : MonoBehaviour
     public ShakeCamera Addon_CamShake;
     [Space]
     public Vector3 offset = Vector2.zero;
-    public float directionOffset = 2;
-    public float zoom = 2;
+    //public float directionOffset = 2;
+    //public float zoom = 2;
     [Space]
     [Range(0f, 1f)] public float stickness = .5f;
     [Range(1f, 2f)] public float screenBorder = 1.2f;
@@ -25,7 +25,7 @@ public class CameraFollower : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (PlayerSinglton.IsGood)
         {
@@ -35,8 +35,8 @@ public class CameraFollower : MonoBehaviour
         var pX = Mathf.Clamp((Input.mousePosition.x / Screen.width * 2 - 1) * screenBorder, -1, 1);
         var pY = Mathf.Clamp((Input.mousePosition.y / Screen.height * 2 - 1) * screenBorder, -1, 1);
 
-        var directionOffset = new Vector3(pX, pY, 0) * this.directionOffset;
-        Vector3 targetPosition = lastTargetPosition + Offset + directionOffset;
+        //var directionOffset = new Vector3(pX, pY, 0) * this.directionOffset;
+        Vector3 targetPosition = lastTargetPosition + Offset /*+ directionOffset*/;
 
         if (Addon_CamShake != null)
         {

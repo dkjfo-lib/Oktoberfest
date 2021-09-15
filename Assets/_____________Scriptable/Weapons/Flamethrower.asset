@@ -14,23 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Flamethrower
   primaryFire:
-    projectiles:
-    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
-    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
-    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
-    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
-    - {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+    bursts:
+    - projectile: {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+      count: 3
+    - projectile: {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+      count: 3
+    - projectile: {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+      count: 3
+    - projectile: {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+      count: 3
+    - projectile: {fileID: 6389493635302546921, guid: e94bac4ac853fd84990cf1d19377441c, type: 3}
+      count: 3
     delayBetweenProjectiles: 0
     accuracity: 0
     shotsPerSecond: 16
     ammoType: 2
     shotCost: 1
     clipSize: 80
-    ammoInClip: 53
+    ammoInClip: 11
     reloadTime: 2
     fireSound: {fileID: 11400000, guid: 0f2927c25ccf5b441a3acd67dc66d81b, type: 2}
   secondaryFire:
-    projectiles: []
+    bursts: []
     delayBetweenProjectiles: 0
     accuracity: 0
     shotsPerSecond: 0

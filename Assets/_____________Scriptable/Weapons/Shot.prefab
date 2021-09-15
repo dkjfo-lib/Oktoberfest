@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6881992066870467613}
   - component: {fileID: 4672401664167637438}
   - component: {fileID: 6389493635302546921}
-  - component: {fileID: 5178433655351561917}
   - component: {fileID: 2949379753765352260}
-  - component: {fileID: 5977442985457239805}
   - component: {fileID: 1149336562980101152}
+  - component: {fileID: 5977442985457239805}
+  - component: {fileID: -4684258851610368821}
   m_Layer: 10
   m_Name: Shot
   m_TagString: Untagged
@@ -67,25 +67,6 @@ MonoBehaviour:
   timeToLive: 0.75
   FactionToHit: 0
   addon_trail: {fileID: 0}
---- !u!114 &5178433655351561917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128160374494526987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20ea9769b02ee6e4fa2fcbab033a9180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Pipe_CamShakes: {fileID: 11400000, guid: 133dbdb3f490cca4dbe55bf0306efab1, type: 2}
-  shake:
-    amplitude: 0.15
-    duration: 0.2
-    shakesPerSecond: 1000
-  onStart: 1
-  onDestroy: 0
 --- !u!114 &2949379753765352260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +83,20 @@ MonoBehaviour:
   sound: {fileID: 11400000, guid: 1da00febe55d45c40a42e0352afdc040, type: 2}
   onStart: 0
   onDestroy: 1
+--- !u!114 &1149336562980101152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128160374494526987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2662b0adf20926741a4af815c64ff706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lr: {fileID: 372285217853540880}
+  length: 3
 --- !u!54 &5977442985457239805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1149336562980101152
+--- !u!114 &-4684258851610368821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,11 +122,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2128160374494526987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2662b0adf20926741a4af815c64ff706, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ea9769b02ee6e4fa2fcbab033a9180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lr: {fileID: 372285217853540880}
-  length: 3
+  Pipe_CamShakes: {fileID: 11400000, guid: 133dbdb3f490cca4dbe55bf0306efab1, type: 2}
+  shake:
+    amplitude: 0.2
+    duration: 0.1
+    shakesPerSecond: 1
+  onStart: 1
+  onDestroy: 0
 --- !u!1 &5980423940985532578
 GameObject:
   m_ObjectHideFlags: 0

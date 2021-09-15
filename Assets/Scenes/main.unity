@@ -1789,7 +1789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipe: {fileID: 11400000, guid: 133dbdb3f490cca4dbe55bf0306efab1, type: 2}
   shakeLength: 0.05
-  roughness: 0.1
+  roughness: 0.2
 --- !u!114 &465559066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,8 +1804,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Addon_CamShake: {fileID: 465559065}
   offset: {x: 0, y: 2, z: 0}
-  directionOffset: 0
-  zoom: 0
   stickness: 1
   screenBorder: 1
 --- !u!4 &465559067
@@ -2168,7 +2166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 8.5, y: -4.5}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755779640
@@ -3869,7 +3867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1173455263
 Transform:
   m_ObjectHideFlags: 0

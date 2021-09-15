@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
-    public bool onGround = false;
+    public bool onGround => staysOnGround && onGroundTime > .05f;
+    bool staysOnGround = false;
+    float onGroundTime => Time.timeSinceLevelLoad - onGroundStart;
+    float onGroundStart = 100;
 
     private void OnTriggerEnter(Collider collision)
     {
-        onGround = true;
+        onGroundStart = Time.timeSinceLevelLoad;
+        staysOnGround = true;
     }
 
-    private void OnTriggerStay(Collider collision)
-    {
-        onGround = true;
-    }
+    //private void OnTriggerStay(Collider collision)
+    //{
+    //    staysOnGround = true;
+    //}
 
     private void OnTriggerExit(Collider collision)
     {
-        onGround = false;
+        staysOnGround = false;
     }
 }

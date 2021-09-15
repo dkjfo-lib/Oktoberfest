@@ -187,7 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d19e3fb8e368164abad8934d5ce193d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onGround: 0
 --- !u!65 &314731306173785191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -436,11 +435,10 @@ MonoBehaviour:
   hp: 3
   faction: 3
   Addon_HPValueOutput: {fileID: 0}
-  addon_onBodyPartDestroyParticles: {fileID: 0}
   addon_BotNavMesh: {fileID: 314731306702529794}
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
-  sounds_hit: {fileID: 11400000, guid: 5fc95cab4bb8cbd448f8d107dbf381be, type: 2}
-  sounds_bodyPartDestroed: {fileID: 11400000, guid: 5fc95cab4bb8cbd448f8d107dbf381be, type: 2}
+  sounds_hit: {fileID: 11400000, guid: 99239612cc2b0f042816aaa0c20b807e, type: 2}
+  sounds_bodyPartDestroed: {fileID: 11400000, guid: b5df7c75f7127ba4f8f4123740faaaab, type: 2}
 --- !u!114 &251266840
 MonoBehaviour:
   m_ObjectHideFlags: 0

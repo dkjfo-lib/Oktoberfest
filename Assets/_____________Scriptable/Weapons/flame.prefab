@@ -52,6 +52,7 @@ MonoBehaviour:
   speed: 15
   timeToLive: 0.4
   FactionToHit: 0
+  addon_trail: {fileID: 0}
 --- !u!114 &5178433655351561917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +70,7 @@ MonoBehaviour:
     amplitude: 0.05
     duration: 0.1
     shakesPerSecond: 1000
-  onStart: 1
+  onStart: 0
   onDestroy: 0
 --- !u!54 &5977442985457239805
 Rigidbody:

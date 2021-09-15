@@ -45,14 +45,16 @@ public class BotShoot : MonoBehaviour
             Pipe_SoundsPlay.AddClip(new PlayClipData(shotInfo.fireSound, transform.position));
             BotMeshAnimator.Attack();
 
-            foreach (var projectile in shotInfo.projectiles)
+            foreach (var burst in shotInfo.bursts)
             {
-                var newProjectile = Instantiate(projectile, gunpoint.transform.position, transform.rotation);
-                newProjectile.transform.forward = shootDirection;
-                newProjectile.FactionToHit = Faction.PlayerTeam;
-                newProjectile.transform.forward +=
-                    newProjectile.transform.right * shotInfo.GetRandomDeviation +
-                    newProjectile.transform.up * shotInfo.GetRandomDeviation;
+                for (int shotCount = 0; shotCount < burst.count; shotCount++)
+                {
+                    var newProjectile = Instantiate(burst.projectile, gunpoint.transform.position, transform.rotation);
+                    newProjectile.FactionToHit = Faction.PlayerTeam;
+                    newProjectile.transform.forward +=
+                        newProjectile.transform.right * shotInfo.GetRandomDeviation() +
+                        newProjectile.transform.up * shotInfo.GetRandomDeviation();
+                }
 
                 if (shotInfo.delayBetweenProjectiles > 0)
                     yield return new WaitForSeconds(shotInfo.delayBetweenProjectiles);

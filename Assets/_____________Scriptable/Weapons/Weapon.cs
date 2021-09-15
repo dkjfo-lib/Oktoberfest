@@ -9,6 +9,6 @@ public class Weapon : ScriptableObject
     public ShotInfo primaryFire;
     public ShotInfo secondaryFire;
 
-    public bool HasPrimary => primaryFire.projectiles.Length > 0;
-    public bool HasSecondary => secondaryFire.projectiles.Length > 0;
+    public bool HasPrimary => primaryFire.bursts.Length > 0;
+    public bool HasSecondary => secondaryFire.bursts.Length > 0;
 }

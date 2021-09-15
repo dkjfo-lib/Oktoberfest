@@ -13,6 +13,8 @@ public class PlayerShoot : MonoBehaviour
     public Transform gunpoint;
     [Space]
     public bool canShoot = true;
+    public float accuracityReplanishment = 1;
+    public float currentAccuracity = 1;
 
     Weapon currentWeapon => allWeapons[currentWeaponId];
 
@@ -21,6 +23,12 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         allWeaponsModels[currentWeaponId].SetActive(true);
+    }
+
+    private void FixedUpdate()
+    {
+        // aim 
+        currentAccuracity += accuracityReplanishment * Time.fixedDeltaTime;
     }
 
     void Update()
@@ -52,6 +60,7 @@ public class PlayerShoot : MonoBehaviour
             }
             allWeaponsModels[currentWeaponId].SetActive(true);
         }
+
         // shoot
         if (canShoot && currentWeapon.HasPrimary && Input.GetMouseButton(0))
         {
@@ -85,13 +94,18 @@ public class PlayerShoot : MonoBehaviour
         shotInfo.ammoInClip -= shotInfo.shotCost;
         Pipe_SoundsPlay.AddClip(new PlayClipData(shotInfo.fireSound, transform.position));
 
-        foreach (var projectile in shotInfo.projectiles)
+        foreach (var burst in shotInfo.bursts)
         {
-            var newProjectile = Instantiate(projectile, gunpoint.transform.position, transform.rotation);
-            newProjectile.FactionToHit = Faction.OpponentTeam;
-            newProjectile.transform.forward +=
-                newProjectile.transform.right * shotInfo.GetRandomDeviation +
-                newProjectile.transform.up * shotInfo.GetRandomDeviation;
+            for (int i = 0; i < burst.count; i++)
+            {
+                var newProjectile = Instantiate(burst.projectile, gunpoint.transform.position, transform.rotation);
+                newProjectile.FactionToHit = Faction.OpponentTeam;
+                currentAccuracity -= Random.Range(0, 1 - shotInfo.accuracity);
+                currentAccuracity = Mathf.Clamp(currentAccuracity, shotInfo.accuracity, 1);
+                newProjectile.transform.forward +=
+                    newProjectile.transform.right * shotInfo.GetRandomDeviation(currentAccuracity) +
+                    newProjectile.transform.up * shotInfo.GetRandomDeviation(currentAccuracity);
+            }
 
             if (shotInfo.delayBetweenProjectiles > 0)
                 yield return new WaitForSeconds(shotInfo.delayBetweenProjectiles);
@@ -114,14 +128,13 @@ public class PlayerShoot : MonoBehaviour
 [System.Serializable]
 public class ShotInfo
 {
-    public GunShot[] projectiles;
+    public Burst[] bursts;
     public float delayBetweenProjectiles;
     [Space]
     [Tooltip("value of 1 generates deviation of up to 45 degrees from aim")]
     [Range(0, 1)] public float accuracity;
     public float shotsPerSecond;
     [Space]
-    public AmmoType ammoType;
     public int shotCost;
     public int clipSize;
     public int ammoInClip;
@@ -131,14 +144,15 @@ public class ShotInfo
 
     public bool NeedsReloading => ammoInClip < shotCost;
 
-    public float GetDeviationValue => 1 - accuracity;
-    public float GetRandomDeviation => Random.Range(-GetDeviationValue, GetDeviationValue);
+    public float GetDeviationValue() => 1 - accuracity;
+    public float GetDeviationValue(float customAccuracity) => 1 - customAccuracity;
+    public float GetRandomDeviation() => Random.Range(-GetDeviationValue(), GetDeviationValue());
+    public float GetRandomDeviation(float customAccuracity) => Random.Range(-GetDeviationValue(customAccuracity), GetDeviationValue(customAccuracity));
 }
 
-public enum AmmoType
+[System.Serializable]
+public struct Burst
 {
-    SMG,
-    Shotgun,
-    Fire,
-    Grenade
+    public GunShot projectile;
+    public int count;
 }
