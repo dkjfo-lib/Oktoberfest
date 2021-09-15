@@ -12,6 +12,7 @@ public class PlayerShoot : MonoBehaviour
     public Pipe_SoundsPlay Pipe_SoundsPlay;
     public Transform gunpoint;
     [Space]
+    public ClampedValue Addon_AmmoCountOutput;
     public bool canShoot = true;
     public float accuracityReplanishment = 1;
     public float currentAccuracity = 1;
@@ -22,6 +23,16 @@ public class PlayerShoot : MonoBehaviour
 
     void Start()
     {
+        if (Addon_AmmoCountOutput != null)
+        {
+            Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
+            Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
+        }
+
+        foreach (var weapon in allWeaponsModels)
+        {
+            weapon.SetActive(false);
+        }
         allWeaponsModels[currentWeaponId].SetActive(true);
     }
 
@@ -46,6 +57,12 @@ public class PlayerShoot : MonoBehaviour
                 canShoot = true;
             }
             allWeaponsModels[currentWeaponId].SetActive(true);
+
+            if (Addon_AmmoCountOutput != null)
+            {
+                Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
+                Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
+            }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
@@ -59,6 +76,12 @@ public class PlayerShoot : MonoBehaviour
                 canShoot = true;
             }
             allWeaponsModels[currentWeaponId].SetActive(true);
+
+            if (Addon_AmmoCountOutput != null)
+            {
+                Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
+                Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
+            }
         }
 
         // shoot
@@ -66,11 +89,8 @@ public class PlayerShoot : MonoBehaviour
         {
             currentAction = ShotOrReaload(currentWeapon.primaryFire);
         }
-        if (canShoot && currentWeapon.HasSecondary && Input.GetMouseButton(1))
-        {
-            currentAction = ShotOrReaload(currentWeapon.secondaryFire);
-        }
-        if (canShoot && currentWeapon.HasPrimary && Input.GetKeyDown(KeyCode.R))
+        if (canShoot && currentWeapon.HasPrimary &&
+            (Input.GetKeyDown(KeyCode.R) || currentWeapon.primaryFire.NeedsReloading))
         {
             currentAction = StartCoroutine(Reload(currentWeapon.primaryFire));
         }
@@ -92,7 +112,7 @@ public class PlayerShoot : MonoBehaviour
     {
         canShoot = false;
         shotInfo.ammoInClip -= shotInfo.shotCost;
-        Pipe_SoundsPlay.AddClip(new PlayClipData(shotInfo.fireSound, transform.position));
+        Pipe_SoundsPlay.AddClip(new PlayClipData(shotInfo.fireSound, transform.position, transform));
 
         foreach (var burst in shotInfo.bursts)
         {
@@ -105,6 +125,12 @@ public class PlayerShoot : MonoBehaviour
                 newProjectile.transform.forward +=
                     newProjectile.transform.right * shotInfo.GetRandomDeviation(currentAccuracity) +
                     newProjectile.transform.up * shotInfo.GetRandomDeviation(currentAccuracity);
+
+                if (Addon_AmmoCountOutput != null)
+                {
+                    Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
+                    Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
+                }
             }
 
             if (shotInfo.delayBetweenProjectiles > 0)
@@ -122,6 +148,12 @@ public class PlayerShoot : MonoBehaviour
 
         shotInfo.ammoInClip = shotInfo.clipSize;
         canShoot = true;
+
+        if (Addon_AmmoCountOutput != null)
+        {
+            Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
+            Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
+        }
     }
 }
 

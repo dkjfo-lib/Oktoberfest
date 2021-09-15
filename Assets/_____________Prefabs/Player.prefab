@@ -478,6 +478,7 @@ MonoBehaviour:
   currentWeaponId: 0
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   gunpoint: {fileID: 6682199571569635941}
+  Addon_AmmoCountOutput: {fileID: 11400000, guid: 294eded1c1dd51943b2934683b5ae5a8, type: 2}
   canShoot: 1
   accuracityReplanishment: 0.07
   currentAccuracity: 1
@@ -537,7 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d19e3fb8e368164abad8934d5ce193d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onGround: 0
 --- !u!65 &5807817180030556349
 BoxCollider:
   m_ObjectHideFlags: 0

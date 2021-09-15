@@ -15,10 +15,11 @@ public class GroundDetector : MonoBehaviour
         staysOnGround = true;
     }
 
-    //private void OnTriggerStay(Collider collision)
-    //{
-    //    staysOnGround = true;
-    //}
+    private void OnTriggerStay(Collider collision)
+    {
+        //onGroundStart = Time.timeSinceLevelLoad;
+        staysOnGround = true;
+    }
 
     private void OnTriggerExit(Collider collision)
     {

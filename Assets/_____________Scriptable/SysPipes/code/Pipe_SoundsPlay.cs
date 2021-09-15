@@ -18,10 +18,12 @@ public struct PlayClipData
 {
     public ClipsCollection clipCollection;
     public Vector3 position;
+    public Transform parent;
 
-    public PlayClipData(ClipsCollection clipCollection, Vector3 position)
+    public PlayClipData(ClipsCollection clipCollection, Vector3 position, Transform parent = null)
     {
         this.clipCollection = clipCollection;
         this.position = position;
+        this.parent = parent;
     }
 }

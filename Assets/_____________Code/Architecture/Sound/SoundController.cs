@@ -48,13 +48,14 @@ public class SoundController : MonoBehaviour
             {
                 PlaySound(
                     sameClipsCollections.ElementAt(i).clipCollection.GetRandomClip(),
-                    sameClipsCollections.ElementAt(i).position);
+                    sameClipsCollections.ElementAt(i).position,
+                    sameClipsCollections.ElementAt(i).parent);
             }
         }
         pipe.awaitingClips.Clear();
     }
 
-    public void PlaySound(AudioClip clip, Vector3 position)
+    public void PlaySound(AudioClip clip, Vector3 position, Transform parent)
     {
         var readySource = soundPlayers.FirstOrDefault(s => !s.isPlaying);
         if (readySource == null)
@@ -63,6 +64,7 @@ public class SoundController : MonoBehaviour
             return;
         }
         readySource.transform.position = position;
+        if (parent != null) readySource.transform.parent = parent;
         readySource.clip = clip;
         readySource.Play();
     }
