@@ -16,6 +16,8 @@ public class PlayerShoot : MonoBehaviour
     public bool canShoot = true;
     public float accuracityReplanishment = 1;
     public float currentAccuracity = 1;
+    [Space]
+    public PlayerHands playerHands;
 
     Weapon currentWeapon => allWeapons[currentWeaponId];
     bool isInMenu => Time.timeScale == 0;
@@ -33,6 +35,7 @@ public class PlayerShoot : MonoBehaviour
         foreach (var weapon in allWeaponsModels)
         {
             weapon.SetActive(false);
+            playerHands.AnimChangegun(currentWeaponId);
         }
         allWeaponsModels[currentWeaponId].SetActive(true);
     }
@@ -66,6 +69,7 @@ public class PlayerShoot : MonoBehaviour
                 Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
                 Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
             }
+            playerHands.AnimChangegun(currentWeaponId);
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
@@ -85,17 +89,20 @@ public class PlayerShoot : MonoBehaviour
                 Addon_AmmoCountOutput.value = currentWeapon.primaryFire.ammoInClip;
                 Addon_AmmoCountOutput.maxValue = currentWeapon.primaryFire.clipSize;
             }
+            playerHands.AnimChangegun(currentWeaponId);
         }
 
+        // reload
+        if (canShoot && currentWeapon.HasPrimary &&
+            (Input.GetKeyDown(KeyCode.R) || currentWeapon.primaryFire.NeedsReloading))
+        {
+            playerHands.AnimReload();
+            currentAction = StartCoroutine(Reload(currentWeapon.primaryFire));
+        }
         // shoot
         if (canShoot && currentWeapon.HasPrimary && Input.GetMouseButton(0))
         {
             currentAction = ShotOrReaload(currentWeapon.primaryFire);
-        }
-        if (canShoot && currentWeapon.HasPrimary &&
-            (Input.GetKeyDown(KeyCode.R) || currentWeapon.primaryFire.NeedsReloading))
-        {
-            currentAction = StartCoroutine(Reload(currentWeapon.primaryFire));
         }
     }
 
@@ -103,10 +110,12 @@ public class PlayerShoot : MonoBehaviour
     {
         if (shotInfo.NeedsReloading)
         {
+            playerHands.AnimReload();
             return StartCoroutine(Reload(shotInfo));
         }
         else
         {
+            playerHands.AnimShoot();
             return StartCoroutine(ShootWeapon(shotInfo));
         }
     }

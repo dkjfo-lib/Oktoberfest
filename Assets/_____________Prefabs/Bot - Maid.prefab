@@ -291,14 +291,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a801905388a9b9241b6a90943ff84f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SightRange: 10
+  SightRange: 20
   BlindCloseRange: 2
   SightAngleDotProd: 0.25
   MovementSpeed: 10
   AttackRange: 8
   AttackAngleDotProd: 0.95
   Weapon: {fileID: 11400000, guid: d572764428085d94783b9e6be5b425bf, type: 2}
-  BotAimTime: 0.25
+  BotAimTime: 0.4
   ShotsInValley: 1
 --- !u!114 &4423753164088145569
 MonoBehaviour:
@@ -325,6 +325,10 @@ MonoBehaviour:
   - {x: 1, y: 3, z: -1}
   - {x: -1, y: 3, z: 1}
   - {x: -1, y: 3, z: -1}
+  - {x: 0.5, y: 0.6, z: 1}
+  - {x: 0.5, y: 0.6, z: -1}
+  - {x: -0.5, y: 0.6, z: 1}
+  - {x: -0.5, y: 0.6, z: -1}
   rendDotAngle: 0.4
   updateEveryRrame: 2
   currentState: 1
