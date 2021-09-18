@@ -30,6 +30,12 @@ ModelImporter:
   - first:
       74: -8566568191151001344
     second: metarig|shotgun shoot & pump
+  - first:
+      74: 6418989530606881278
+    second: metarig|WeaponDown
+  - first:
+      74: 8403468068124046826
+    second: 'metarig|shotgun shoot & pump '
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -102,7 +108,7 @@ ModelImporter:
       takeName: metarig|shotgun reload
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 52
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -214,11 +220,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|weapon down
-      takeName: metarig|weapon down
+      name: metarig|WeaponDown
+      takeName: metarig|WeaponDown
       internalID: 0
       firstFrame: 0
-      lastFrame: 9
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -243,11 +249,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|shotgun shoot & pump
-      takeName: metarig|shotgun shoot & pump 0
+      name: 'metarig|shotgun shoot & pump '
+      takeName: 'metarig|shotgun shoot & pump '
       internalID: 0
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

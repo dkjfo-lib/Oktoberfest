@@ -501,11 +501,12 @@ MonoBehaviour:
   allWeapons:
   - {fileID: 11400000, guid: 4d89ec7b270ad1d4c9b0b8df2cc35697, type: 2}
   - {fileID: 11400000, guid: dc9fda270adc9774da00e6cec2dc506a, type: 2}
-  - {fileID: 11400000, guid: 5d200744f993939439269b4f02a2832b, type: 2}
   allWeaponsModels:
-  - {fileID: 512727977072925511}
-  - {fileID: 8342527477108227805}
-  - {fileID: 1023205299958428}
+  - gameObjects:
+    - {fileID: 512727977072925511}
+    - {fileID: 1023205299958428}
+  - gameObjects:
+    - {fileID: 8342527477108227805}
   currentWeaponId: 0
   Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   gunpoint: {fileID: 6682199571569635941}
@@ -983,9 +984,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3448985308754656649, guid: b1b6803b889a24f44a2fbbc5f7d9ca33, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1742893362208886120, guid: b1b6803b889a24f44a2fbbc5f7d9ca33, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b1b6803b889a24f44a2fbbc5f7d9ca33, type: 3}
       propertyPath: m_Name
       value: shotgun in hands
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864300947102499012, guid: b1b6803b889a24f44a2fbbc5f7d9ca33, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1b6803b889a24f44a2fbbc5f7d9ca33, type: 3}

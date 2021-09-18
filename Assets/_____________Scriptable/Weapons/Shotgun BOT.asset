@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcab47d48857e5642a386cd06adb3c0b, type: 3}
   m_Name: Shotgun BOT
   m_EditorClassIdentifier: 
-  weaponName: Shotgun
+  weaponName: Shotgun bot
   primaryFire:
     bursts:
-    - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
+    - projectile: {fileID: 6389493635302546921, guid: 98174b05d53c57b4f9d6fa26b4e5e275, type: 3}
       count: 2
-    - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
+    - projectile: {fileID: 6389493635302546921, guid: 98174b05d53c57b4f9d6fa26b4e5e275, type: 3}
       count: 2
     delayBetweenProjectiles: 0.001
     accuracity: 0.8

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public Weapon[] allWeapons;
-    public GameObject[] allWeaponsModels;
+    public GameObjectArr[] allWeaponsModels;
     [Space]
     public int currentWeaponId = 0;
     [Space]
@@ -199,4 +199,18 @@ public struct Burst
 {
     public GunShot projectile;
     public int count;
+}
+
+[System.Serializable]
+public struct GameObjectArr
+{
+    public GameObject[] gameObjects;
+
+    public void SetActive(bool state)
+    {
+        foreach (var go in gameObjects)
+        {
+            go.SetActive(state);
+        }
+    }
 }

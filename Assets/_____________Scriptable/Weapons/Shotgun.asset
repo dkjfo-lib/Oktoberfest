@@ -26,20 +26,8 @@ MonoBehaviour:
     delayBetweenProjectiles: 0.001
     accuracity: 0.8
     shotsPerSecond: 1
-    ammoType: 1
     shotCost: 1
     clipSize: 6
-    ammoInClip: 1
-    reloadTime: 1.5
-    fireSound: {fileID: 11400000, guid: 02c53cb6148d8914897be10980c3f093, type: 2}
-  secondaryFire:
-    bursts: []
-    delayBetweenProjectiles: 0
-    accuracity: 0
-    shotsPerSecond: 0
-    ammoType: 0
-    shotCost: 0
-    clipSize: 0
     ammoInClip: 0
-    reloadTime: 0
-    fireSound: {fileID: 0}
+    reloadTime: 2
+    fireSound: {fileID: 11400000, guid: 02c53cb6148d8914897be10980c3f093, type: 2}

@@ -39,7 +39,7 @@ public class BotMovement : MonoBehaviour, IBotMovement
         {
             yield return new WaitUntil(() => IsMoving);
             if (Addon_Pipe_SoundsPlay != null && Addon_stepSound != null)
-                Addon_Pipe_SoundsPlay.AddClip(new PlayClipData(Addon_stepSound, Camera.main.transform.position, Camera.main.transform));
+                Addon_Pipe_SoundsPlay.AddClip(new PlayClipData(Addon_stepSound, transform.position));
             yield return new WaitForSeconds(.25f);
         }
     }
