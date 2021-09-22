@@ -2,59 +2,97 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotSight : MonoBehaviour
+public class BotSight : MonoBehaviour, IBotSight
 {
-    public float radius = 5;
-    public float innerRadius = 1.2f;
+    public BotStats BotStats;
+    public float sightRange => BotStats.SightRange;
+    public float blindCloseRange => BotStats.BlindCloseRange;
+    public float sightDotProduct => BotStats.SightAngleDotProd;
 
-    public PlayerSinglton thePlayer;
-    public Vector3 vectorToPlayer => thePlayer.transform.position - transform.position;
+    PlayerSinglton thePlayer;
+    bool canSee = false;
+
+    public bool CanSee => canSee;
+    public bool EnemyIsNear => thePlayer != null;
+
+    // "Vector3.up * 1" due to error in character's y coordinate
+    public Vector3 vectorToPlayer => thePlayer.transform.position + Vector3.up * 1 - transform.position;
     public Vector3 directionToPlayer => vectorToPlayer.normalized;
     public float distanceToPlayer => vectorToPlayer.magnitude;
-
-    public Transform hitted;
-    public bool canSee = false;
+    public float dotProductToPlayer => thePlayer != null ?
+        Vector3.Dot(
+            new Vector3(transform.forward.normalized.x, 0, transform.forward.normalized.z),
+            new Vector3(directionToPlayer.normalized.x, 0, directionToPlayer.normalized.z)) :
+        -2;
 
     void Start()
     {
         thePlayer = null;
-        GetComponent<CircleCollider2D>().radius = radius;
+        GetComponent<SphereCollider>().radius = sightRange;
 
         StartCoroutine(LookAtPlayer());
     }
 
+
     IEnumerator LookAtPlayer()
     {
+        bool IsPlayerInFront() => dotProductToPlayer >= sightDotProduct;
+        bool IsPlayerTooClose() => distanceToPlayer <= blindCloseRange;
         while (true)
         {
-            yield return new WaitUntil(() => thePlayer != null);
-            var hit = Physics2D.Raycast(transform.position + directionToPlayer * innerRadius, directionToPlayer, distanceToPlayer - innerRadius + .75f, Layers.CharactersAndGround);
+            yield return new WaitUntil(() => thePlayer != null && (IsPlayerInFront() || IsPlayerTooClose()));
 
-            hitted = hit.transform;
-            if (hit.transform != null)
+            if (IsPlayerTooClose())
             {
-                canSee = hit.transform.GetComponent<PlayerSinglton>() != null;
+                canSee = true;
             }
             else
             {
-                canSee = false;
+                Vector3 origin = transform.position + directionToPlayer * blindCloseRange;
+                Vector3 direction = directionToPlayer;
+                RaycastHit raycastHit;
+                float castRadius = distanceToPlayer - blindCloseRange + .75f;
+                var hit = Physics.Raycast(origin, direction, out raycastHit, castRadius, Layers.PlayerAndGround);
+
+                if (hit)
+                {
+                    var hitted = raycastHit.transform;
+                    if (raycastHit.transform != null)
+                    {
+                        canSee = raycastHit.transform.GetComponent<PlayerSinglton>() != null;
+                    }
+                    else
+                    {
+                        canSee = false;
+                    }
+                }
+                else
+                {
+                    canSee = false;
+                }
             }
 
             yield return new WaitForSeconds(.5f);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        var player = collision.GetComponent<PlayerSinglton>();
+        if (!PlayerSinglton.IsGood) return;
+
+        var player = collision.transform.parent.parent.
+            GetComponent<PlayerSinglton>();
         if (player == null) return;
 
         thePlayer = player;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
-        var player = collision.GetComponent<PlayerSinglton>();
+        if (!PlayerSinglton.IsGood) return;
+
+        var player = collision.transform.parent.parent.
+            GetComponent<PlayerSinglton>();
         if (player == null) return;
 
         thePlayer = null;
@@ -63,15 +101,20 @@ public class BotSight : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, radius);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, innerRadius);
-
         if (thePlayer != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position + directionToPlayer * innerRadius, transform.position + directionToPlayer * (distanceToPlayer - innerRadius + .75f));
+
+            Vector3 origin = transform.position + directionToPlayer * blindCloseRange;
+            float castDistance = distanceToPlayer - blindCloseRange + .75f;
+            Vector3 end = transform.position + directionToPlayer * castDistance;
+            Gizmos.DrawLine(origin, end);
         }
     }
+}
+
+public interface IBotSight
+{
+    bool CanSee { get; }
+    bool EnemyIsNear { get; }
 }

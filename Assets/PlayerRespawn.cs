@@ -6,30 +6,21 @@ using UnityEngine.SceneManagement;
 public class PlayerRespawn : MonoBehaviour
 {
     public PlayerSinglton playerPrefab;
-    [Space]
-    public bool wasWithBosses = false;
-    public string normalLevel;
-    public string bossOnlyLevel;
 
     void Start()
     {
+        OnDestroySpawn.isQuitting = false;
         StartCoroutine(RespawnPlayer());
     }
 
     IEnumerator RespawnPlayer()
     {
-        yield return new WaitUntil(() => PlayerSinglton.thePlayer == null);
+        yield return new WaitUntil(() => !PlayerSinglton.IsGood);
         Time.timeScale = .5f;
         yield return new WaitForSeconds(1);
         Time.timeScale = 1;
 
-        if (wasWithBosses)
-        {
-            SceneManager.LoadScene(bossOnlyLevel);
-        }
-        else
-        {
-            SceneManager.LoadScene(normalLevel);
-        }
+        OnDestroySpawn.isQuitting = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

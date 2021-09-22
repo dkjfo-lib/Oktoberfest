@@ -6,7 +6,7 @@ public class App : MonoBehaviour
 {
     static App app;
 
-    private void Awake()
+    private void Start()
     {
         if (app != null) Destroy(gameObject);
 

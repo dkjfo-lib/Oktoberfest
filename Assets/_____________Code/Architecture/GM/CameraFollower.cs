@@ -6,49 +6,37 @@ public class CameraFollower : MonoBehaviour
 {
     public ShakeCamera Addon_CamShake;
     [Space]
-    public Vector2 offset = Vector2.zero;
-    public float directionOffset = 2;
-    public float zoom = 2;
+    public Vector3 offset = Vector2.zero;
+    //public float directionOffset = 2;
+    //public float zoom = 2;
     [Space]
     [Range(0f, 1f)] public float stickness = .5f;
     [Range(1f, 2f)] public float screenBorder = 1.2f;
 
-    Vector3 Offset => new Vector3(offset.x, offset.y, -10);
-    
-    PlayerSinglton currentPlayer;
+    Vector3 Offset => offset;
+
     Vector3 lastTargetPosition;
 
     private void Start()
     {
-        if (currentPlayer == null)
+        if (PlayerSinglton.IsGood)
         {
-            currentPlayer = PlayerSinglton.thePlayer;
-        }
-        transform.position = currentPlayer.transform.position + Offset;
-        StartCoroutine(KeepPlayerActive());
-    }
-
-    private IEnumerator KeepPlayerActive()
-    {
-        while (true)
-        {
-            yield return new WaitUntil(() => currentPlayer == null || currentPlayer.NotActive);
-            currentPlayer = PlayerSinglton.thePlayer;
+            transform.position = PlayerSinglton.PlayerPosition + Offset;
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (currentPlayer != null)
+        if (PlayerSinglton.IsGood)
         {
-            lastTargetPosition = currentPlayer.transform.position;
+            lastTargetPosition = PlayerSinglton.PlayerPosition;
         }
 
         var pX = Mathf.Clamp((Input.mousePosition.x / Screen.width * 2 - 1) * screenBorder, -1, 1);
         var pY = Mathf.Clamp((Input.mousePosition.y / Screen.height * 2 - 1) * screenBorder, -1, 1);
 
-        var directionOffset = new Vector3(pX, pY, 0) * this.directionOffset;
-        Vector3 targetPosition = lastTargetPosition + Offset + directionOffset;
+        //var directionOffset = new Vector3(pX, pY, 0) * this.directionOffset;
+        Vector3 targetPosition = lastTargetPosition + Offset /*+ directionOffset*/;
 
         if (Addon_CamShake != null)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoCamShake : MonoBehaviour
 {
     public Pipe_CamShakes Pipe_CamShakes;
-    public ShakeAtributes shake;
+    public ShakeAtributes shake = new ShakeAtributes(.1f, .1f, 1000);
     public bool onStart = true;
     public bool onDestroy = true;
 
