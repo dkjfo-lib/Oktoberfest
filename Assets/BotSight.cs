@@ -20,7 +20,9 @@ public class BotSight : MonoBehaviour, IBotSight
     public Vector3 directionToPlayer => vectorToPlayer.normalized;
     public float distanceToPlayer => vectorToPlayer.magnitude;
     public float dotProductToPlayer => thePlayer != null ?
-        Vector3.Dot(transform.forward.normalized, directionToPlayer.normalized) :
+        Vector3.Dot(
+            new Vector3(transform.forward.normalized.x, 0, transform.forward.normalized.z),
+            new Vector3(directionToPlayer.normalized.x, 0, directionToPlayer.normalized.z)) :
         -2;
 
     void Start()

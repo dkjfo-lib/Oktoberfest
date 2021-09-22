@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baaf9a7c3745a0a43b3ed47aa64c09b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxhp: 0
   hp: 20
   faction: 2
   Addon_HPValueOutput: {fileID: 0}
@@ -274,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cb1828b6d606f4fa39d7f1404669d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 1855144228101588950}
 --- !u!114 &2031876973999333475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,11 +288,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b64e67ccc29704eb154284b62072f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
+  speed: 320
   speedMult: 0.75
-  speedMultInAir: 0.96
+  speedMultInAir: 0.94
   controlInAir: 0.2
-  jumpForce: -15
+  jumpForce: -13
   Addon_Pipe_SoundsPlay: {fileID: 11400000, guid: 49c7055d96e6a844d8e1e445464b45ca, type: 2}
   Addon_stepSound: {fileID: 11400000, guid: 60781fc6f0cfc4442a3e6970d6db8ef9, type: 2}
 --- !u!114 &5983582370938733516
@@ -673,6 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baaf9a7c3745a0a43b3ed47aa64c09b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxhp: 0
   hp: 15
   faction: 2
   Addon_HPValueOutput: {fileID: 11400000, guid: 5493bb20cbea8a94b91cfbea3f2e01a0, type: 2}

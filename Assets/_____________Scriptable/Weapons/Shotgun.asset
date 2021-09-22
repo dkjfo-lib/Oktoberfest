@@ -18,16 +18,12 @@ MonoBehaviour:
     - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
       count: 3
     - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
-      count: 3
-    - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
-      count: 3
-    - projectile: {fileID: 6389493635302546921, guid: 72a4983e4cc4e024a914e2897c241078, type: 3}
-      count: 3
+      count: 2
     delayBetweenProjectiles: 0.001
-    accuracity: 0.8
+    accuracity: 0.85
     shotsPerSecond: 1
     shotCost: 1
     clipSize: 6
-    ammoInClip: 0
+    ammoInClip: 6
     reloadTime: 2
     fireSound: {fileID: 11400000, guid: 02c53cb6148d8914897be10980c3f093, type: 2}

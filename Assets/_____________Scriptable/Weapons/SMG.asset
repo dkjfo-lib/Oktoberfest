@@ -22,6 +22,6 @@ MonoBehaviour:
     shotsPerSecond: 8
     shotCost: 1
     clipSize: 28
-    ammoInClip: 9
+    ammoInClip: 28
     reloadTime: 0.75
     fireSound: {fileID: 11400000, guid: d4b6780e11cb21b43bf145d5027b01ac, type: 2}

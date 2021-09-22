@@ -65,7 +65,7 @@ public class BotMovement : MonoBehaviour, IBotMovement
         if (!inAttack && BotSight.CanSee && !IsEnemyInAngleForAttack())
         {
             var _lookRotation = Quaternion.LookRotation(BotSight.directionToPlayer);
-            transform.rotation = Quaternion.Lerp(transform.rotation, _lookRotation, NavMeshAgent.angularSpeed / 360 * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, _lookRotation, NavMeshAgent.angularSpeed / 90 * Time.deltaTime);
         }
     }
 

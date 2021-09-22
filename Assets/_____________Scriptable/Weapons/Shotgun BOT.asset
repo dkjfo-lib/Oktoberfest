@@ -16,11 +16,11 @@ MonoBehaviour:
   primaryFire:
     bursts:
     - projectile: {fileID: 6389493635302546921, guid: 98174b05d53c57b4f9d6fa26b4e5e275, type: 3}
-      count: 2
+      count: 4
     - projectile: {fileID: 6389493635302546921, guid: 98174b05d53c57b4f9d6fa26b4e5e275, type: 3}
-      count: 2
+      count: 4
     delayBetweenProjectiles: 0.001
-    accuracity: 0.8
+    accuracity: 0.81
     shotsPerSecond: 1
     shotCost: 1
     clipSize: 6

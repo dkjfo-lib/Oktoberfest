@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class PlayerHittable : MonoBehaviour, IHittable
 {
+    public float maxhp ;
     public float hp = 3;
     public Faction faction = Faction.AlwaysHit;
     public Faction Faction => faction;
@@ -19,6 +20,7 @@ public class PlayerHittable : MonoBehaviour, IHittable
 
     private void Awake()
     {
+        maxhp = hp;
         if (Addon_HPValueOutput != null) Addon_HPValueOutput.maxValue = hp;
         if (Addon_HPValueOutput != null) Addon_HPValueOutput.value = hp;
     }
@@ -40,6 +42,13 @@ public class PlayerHittable : MonoBehaviour, IHittable
                 addon_BotNavMesh.SetDestination(PlayerSinglton.PlayerPosition);
             }
         }
+    }
+
+    public void Heal(float heal)
+    {
+        hp += heal;
+        if (hp > maxhp) hp = maxhp;
+        if (Addon_HPValueOutput != null) Addon_HPValueOutput.value = hp;
     }
 
     private void Die()

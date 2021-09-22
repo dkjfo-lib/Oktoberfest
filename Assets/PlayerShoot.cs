@@ -93,7 +93,7 @@ public class PlayerShoot : MonoBehaviour
         }
 
         // reload
-        if (canShoot && currentWeapon.HasPrimary &&
+        if (canShoot && currentWeapon.HasPrimary && currentWeapon.primaryFire.ammoInClip != currentWeapon.primaryFire.clipSize &&
             (Input.GetKeyDown(KeyCode.R) || currentWeapon.primaryFire.NeedsReloading))
         {
             playerHands.AnimReload();

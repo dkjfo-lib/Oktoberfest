@@ -9,6 +9,9 @@ public class PlayerSinglton : MonoBehaviour
     public static Vector3 PlayerDirection => thePlayer.transform.forward;
     static PlayerSinglton thePlayer;
 
+    public static PlayerHittable PlayerHealth => thePlayer.playerHealth;
+    public PlayerHittable playerHealth;
+
     void Awake()
     {
         thePlayer = this;
